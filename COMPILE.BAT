@@ -22,7 +22,6 @@ REM
 REM Book commands:
 REM
 REM -AM: Medium model
-REM -Fc: Name source/object listing (?)
 REM -Gs: Remove stack-check calls
 REM -G2: 286 instructions
 REM
@@ -31,6 +30,7 @@ REM
 REM - added `-I`   : Includes
 REM - removed `-c` : Link after compiling
 REM - set %LIB%    : Libs
+REM - removed `-Fc`: Name source/object listing, it seems unnecessary
 REM - removed `-Zi`: Prepare for debugging (CodeView)
 REM - added `-Fe`  : Executable name
 REM
