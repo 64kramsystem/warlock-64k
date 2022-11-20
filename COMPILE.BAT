@@ -1,7 +1,7 @@
 SET PATH=%PATH%;C:\C700\BIN;C:\MASM611\BIN
 SET LIB=C:\C700\LIB
 
-DEL WARLOCK.EXE
+DEL WARLOCK.EXE *.OBJ
 
 REM The book doesn't explain how to compile the ASM files and how to link.
 REM
@@ -16,11 +16,9 @@ REM Required by CL.EXE
 REM
 HX\BIN\HDPMI32.EXE
 
-REM For unclear reasons, if the linker is invoked separately, it raises an error that it isn't raised
-REM when invoked by the compiler.
-REM
 REM Book commands:
 REM
+REM -c : Don't link
 REM -AM: Medium model
 REM -Gs: Remove stack-check calls
 REM -G2: 286 instructions
@@ -28,10 +26,19 @@ REM
 REM Changes:
 REM
 REM - added `-I`   : Includes
-REM - removed `-c` : Link after compiling
 REM - set %LIB%    : Libs
 REM - removed `-Fc`: Name source/object listing, it seems unnecessary
 REM - removed `-Zi`: Prepare for debugging (CodeView)
-REM - added `-Fe`  : Executable name
 REM
-CL -AM -Fc -Gs -G2 -IC700/INCLUDE -FeWARLOCK.EXE DRAWG.OBJ RENDERB.OBJ SLIVER.OBJ *.C
+CL -c -AM -Gs -G2 -IC700/INCLUDE *.C
+
+REM It's possible to link directly via CL:
+REM
+REM - remove `-c`             : Do link
+REM - add `-link GRAPHICS.LIB`: Add required library
+REM - add `*.OBJ`             : ASM object files
+REM - add `-FeWARLOCK.EXE`    : Set the output filename
+REM
+REM The empy spaces (between commas) are, in order, the mapfile and the deffile.
+REM
+LINK DRAWG.OBJ+RENDERB.OBJ+SLIVER.OBJ+graphics.obj+sndlib.obj+warlock.obj,WARLOCK.EXE,,GRAPHICS.LIB,;
