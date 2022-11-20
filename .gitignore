@@ -1,0 +1,9 @@
+# Convenient reference to compare against.
+#
+/dosbox-x.conf.bak
+
+# Compilation artefacts
+#
+/*.COD
+/*.OBJ
+/WARLOCK.EXE
