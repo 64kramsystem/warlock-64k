@@ -4,3 +4,8 @@
 /*.OBJ
 /WARLOCK.MAP
 /WARLOCK.EXE
+
+# Toolchain (copyrighted; use symlinks)
+#
+/C700
+/MASM611
